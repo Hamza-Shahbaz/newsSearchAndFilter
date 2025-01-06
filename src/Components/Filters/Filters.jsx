@@ -3,12 +3,6 @@ import Select from "react-select";
 import CustomDatePicker from "../DatePicker/DatePicker";
 import { useApi } from "../../hooks/useQueryHook";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
 const categories = ['business','entertainment','health','science','sports','technology','general', 'all'];
 
 // React-Select custom styles
@@ -39,23 +33,22 @@ const Filters = ({setToDate, setFromDate, setCategories, setSources}) => {
 
   const {useGetQuery} = useApi();
 
-  const {data, isLoading, isError} = useGetQuery(['news'], 'https://newsapi.org/v2/top-headlines/sources/api/proxy?apiKey=f2263b2809c4472b835f660f61726a1f');
+  // const {data, isLoading, isError} = useGetQuery(['news'], 'https://newsapi.org/v2/top-headlines/sources?apiKey=f2263b2809c4472b835f660f61726a1f');
 
   
-  useEffect(() => {
-    if (data && data.sources) {
-      setSourcesFromApi(data.sources.map((source) => ({ value: source.id, label: source.name })));
-      console.log(data.sources)
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.sources) {
+  //     setSourcesFromApi(data.sources.map((source) => ({ value: source.id, label: source.name })));
+  //   }
+  // }, [data]);
 
-  if (isLoading) {
-    return <div className="flex flex-col fl:flex-row gap-4 justify-between items-stretch lg:min-w-[600px]">Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div className="flex flex-col fl:flex-row gap-4 justify-between items-stretch lg:min-w-[600px]">Loading...</div>;
+  // }
 
-  if (isError) {
-    return <div>Error fetching news sources</div>;
-  }
+  // if (isError) {
+  //   return <div>Error fetching news sources</div>;
+  // }
 
   return (
     <div className="flex flex-col fl:flex-row gap-4 justify-between items-stretch lg:min-w-[600px]">
