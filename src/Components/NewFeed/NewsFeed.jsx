@@ -57,7 +57,7 @@ const NewsFeed = ({sources, categories, toDate, fromDate, searchTerm}) => {
     const {useGetQuery} = useApi();
     
     const [page, setPage] = useState(1);
-    const {data, isLoading, isError} = useGetQuery(['news', searchTerm, sources, categories, toDate, fromDate], `https://newsapi.org/v2/${categories === 'all' ? 'everything' : 'top-headlines'}?page=${page}${searchTerm ?`&q=${searchTerm}` : ''}${sources ? `&sources=${sources}` : ''}${categories && categories !== 'all' ? `&category=${categories}` : ''}${toDate ? `&to=${toDate}` : ''}${fromDate ? `&from=${fromDate}` : ''}&apiKey=f2263b2809c4472b835f660f61726a1f`);
+    const {data, isLoading, isError} = useGetQuery(['news', searchTerm, sources, categories, toDate, fromDate], `https://newsapi.org/v2/${categories === 'all' ? 'everything' : 'top-headlines'}/api/proxy?page=${page}${searchTerm ?`&q=${searchTerm}` : ''}${sources ? `&sources=${sources}` : ''}${categories && categories !== 'all' ? `&category=${categories}` : ''}${toDate ? `&to=${toDate}` : ''}${fromDate ? `&from=${fromDate}` : ''}&apiKey=f2263b2809c4472b835f660f61726a1f`);
 
     if (isLoading) {
         return <div className='p-4'>Loading...</div>

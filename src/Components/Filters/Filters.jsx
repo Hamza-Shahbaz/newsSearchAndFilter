@@ -39,12 +39,13 @@ const Filters = ({setToDate, setFromDate, setCategories, setSources}) => {
 
   const {useGetQuery} = useApi();
 
-  const {data, isLoading, isError} = useGetQuery(['news'], 'https://newsapi.org/v2/top-headlines/sources?apiKey=f2263b2809c4472b835f660f61726a1f');
+  const {data, isLoading, isError} = useGetQuery(['news'], 'https://newsapi.org/v2/top-headlines/sources/api/proxy?apiKey=f2263b2809c4472b835f660f61726a1f');
 
   
   useEffect(() => {
     if (data && data.sources) {
       setSourcesFromApi(data.sources.map((source) => ({ value: source.id, label: source.name })));
+      console.log(data.sources)
     }
   }, [data]);
 
@@ -64,14 +65,14 @@ const Filters = ({setToDate, setFromDate, setCategories, setSources}) => {
           styles={customStyles}
           placeholder="Filter Category"
           className="flex-grow"
-          onChange={({ label }) => setCategories(label)}
+          onChange={({ value }) => setCategories(value)}
         />
         <Select
           options={sourcesFromApi}
           styles={customStyles}
           placeholder="Filter Source"
           className="flex-grow"
-          onChange={({ label }) => setSources(label)}
+          onChange={({ value }) => setSources(value)}
         />
       </div>
       <div className="flex-grow">

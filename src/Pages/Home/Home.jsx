@@ -19,7 +19,7 @@ const Home = () => {
             <Filters setSources={setSources} setCategories={setCategories} setToDate={setToDate} setFromDate={setFromDate}/>
         </div>
         {
-          searchTerm ? 
+          (searchTerm || sources) ? 
           <NewsFeed sources={sources} categories={categories} toDate={toDate} fromDate={fromDate} searchTerm={searchTerm}/>
           : <p className='p-4 text-gray-500 text-center text-lg font-semibold'>Please enter a search term</p>
         }
