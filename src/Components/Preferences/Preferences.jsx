@@ -16,21 +16,21 @@ const Preferences = () => {
   const userPreferences = useSelector((state) => state.user);
   const appliedPreferences = [];
 
-  appliedPreferences.push(
-    ...userPreferences?.source?.map((item) => ({ type: 'source', value: item.label }))
-  );
-  appliedPreferences.push(
-    ...userPreferences?.category?.map((item) => ({ type: 'category', value: item.label }))
-  );
-  appliedPreferences.push(
-    ...userPreferences?.author?.map((item) => ({ type: 'author', value: item.label }))
-  );
+  if(userPreferences.source?.value) {
+    appliedPreferences.push({ type: 'source', value: userPreferences.source.value, label: userPreferences.source.label });
+  }
+  if(userPreferences.author?.value) {
+    appliedPreferences.push({ type: 'author', value: userPreferences.author.value, label: userPreferences.author.label });
+  }
+  if(userPreferences.category?.value) {
+    appliedPreferences.push({ type: 'category', value: userPreferences.category.value, label: userPreferences.category.label });
+  }
   
   const navigate = useNavigate();
   return (
-    <div className="flex flex-row gap-2 p-4 bg-gray-100 rounded-lg shadow-sm">
+    <div className="flex flex-row gap-2 p-4 pl-20 bg-gray-100 rounded-lg shadow-sm">
       <p
-        className="text-lg font-semibold text-gray-700 cursor-pointer"
+        className="text-lg font-semibold text-gray-700 cursor-pointer text-blue-600 hover:text-blue-800"
         onClick={() => navigate("/my-profile")}
       >
         Current Preferences:
@@ -54,7 +54,10 @@ const Preferences = () => {
             </div>
           ))
         ) : (
-          <p className="text-gray-500">None</p>
+          <>
+            <p className="text-gray-500">None</p>
+            <button onClick={() => navigate("/my-profile")} className="text-blue-600 hover:text-blue-800 mx-2">Set Preferences</button>
+          </>
         )}
       </div>
     </div>

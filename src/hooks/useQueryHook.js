@@ -13,6 +13,7 @@ export const useApi = () => {
 
   // Fetch function to get data
   const fetchData = async (endpoint, params = {}) => {
+    if(!endpoint.includes("http")) return;
     const response = await apiClient.get(endpoint, { params });
     return response.data;
   };
@@ -29,6 +30,9 @@ export const useApi = () => {
       useQuery({
         queryKey,
         queryFn: () => fetchData(endpoint, params),
+        retry : 1,
+        staleTime: 60 * 60 * 1000, // 1 hour in milliseconds
+        cacheTime: 60 * 60 * 1000, // 1 hour in milliseconds
         ...options,
       }),
 
@@ -37,6 +41,9 @@ export const useApi = () => {
       useQuery({
         queryKey,
         queryFn: () => fetchDataWithHeaders(endpoint, params),
+        retry : 1,
+        staleTime: 60 * 60 * 1000, // 1 hour in milliseconds
+        cacheTime: 60 * 60 * 1000, // 1 hour in milliseconds
         ...options,
       }),
   };
