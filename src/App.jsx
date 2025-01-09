@@ -7,7 +7,6 @@ import MainRoute from './Route/Route'
 
 function App() {
   
-
   return (
       <BrowserRouter>
         <MainRoute/>

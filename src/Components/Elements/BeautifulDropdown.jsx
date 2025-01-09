@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./TableStatus.css";
 import { useDispatch } from "react-redux";
-import { setNewsOutlet } from "../../store/slices/userSlice";
+import { clearPreferences, setNewsOutlet } from "../../store/slices/userSlice";
 
 const options = [
   {
@@ -38,6 +38,7 @@ const BeautifulDropdown = () => {
     setSelectedStatus(status?.text);
     setIsOpen(false);
     dispatch(setNewsOutlet(status?.text));
+    dispatch(clearPreferences())
   };
 
   const selectedOption = options.find(

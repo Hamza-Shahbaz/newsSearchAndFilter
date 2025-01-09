@@ -13,7 +13,7 @@ export const useApi = () => {
 
   // Fetch function to get data
   const fetchData = async (endpoint, params = {}) => {
-    if(!endpoint.includes("http")) return;
+    if(!endpoint.includes("http")) return ;
     const response = await apiClient.get(endpoint, { params });
     return response.data;
   };

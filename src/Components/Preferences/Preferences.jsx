@@ -3,14 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reducePreference } from "../../store/slices/userSlice";
 
-const appliedPreferences = [
-  "guardian",
-  "mike wizowsky",
-  "economy",
-  "string",
-  "another",
-];
-
 const Preferences = () => {
   const dispatch = useDispatch();
   const userPreferences = useSelector((state) => state.user);
@@ -28,7 +20,7 @@ const Preferences = () => {
   
   const navigate = useNavigate();
   return (
-    <div className="flex flex-row gap-2 p-4 pl-20 bg-gray-100 rounded-lg shadow-sm">
+    <div className="flex flex-row gap-2 p-4 pl-8 sm:pl-20 bg-gray-100 rounded-lg shadow-sm">
       <p
         className="text-lg font-semibold text-gray-700 cursor-pointer text-blue-600 hover:text-blue-800"
         onClick={() => navigate("/my-profile")}

@@ -3,7 +3,6 @@ import Select from "react-select";
 import CustomDatePicker from "../DatePicker/DatePicker";
 import { useApi } from "../../hooks/useQueryHook";
 import { useSelector } from "react-redux";
-import { use } from "react";
 
 const categoriesForOrg = [
   "business",
@@ -78,14 +77,6 @@ const Filters = ({ setToDate, setFromDate, setCategories, setSources }) => {
     }`
   );
 
-  useEffect(() => {
-    if (data && data.sources) {
-      setSourcesFromApi(
-        data.sources.map((source) => ({ value: source.id, label: source.name }))
-      );
-    }
-  }, [data]);
-
   const optionsForCategories =
     userPreference.selectedOutlet === "NewsApi.AI"
       ? categories?.map((category) => ({
@@ -112,42 +103,53 @@ const Filters = ({ setToDate, setFromDate, setCategories, setSources }) => {
         }))
       : [];
 
+  useEffect(() => {
+    setSelectedCategory("");
+    setSelectedSource("");
+    setCategories("");
+    setSources("");
+  }, [userPreference.selectedOutlet]);
+
   return (
     <div className="flex flex-col fl:flex-row gap-4 justify-between items-stretch lg:min-w-[600px]">
-      <div className="flex flex-col xs:flex-row gap-4 flex-grow">
-        {categoriesLoading ? (
-          <div>Loading categories...</div>
-        ) : (
-          <Select
-            options={optionsForCategories}
-            styles={customStyles}
-            placeholder="Filter Category"
-            className="flex-grow"
-            value={selectedCategory}
-            onChange={(selectedOption) => {
-              setSelectedCategory(selectedOption);
-              setCategories(selectedOption ? selectedOption.value : null);
-            }}
-            isClearable
-          />
-        )}
-        {isLoading || isLoadingOrg ? (
-          <div>Loading sources...</div>
-        ) : (
-          <Select
-            options={optionsForSources}
-            styles={customStyles}
-            placeholder="Filter Source"
-            className="flex-grow"
-            value={selectedSource}
-            onChange={(selectedOption) => {
-              setSelectedSource(selectedOption);
-              setSources(selectedOption ? selectedOption.value : null);
-            }}
-            isClearable
-          />
-        )}
-      </div>
+      {userPreference.selectedOutlet !== "Guardian" ? (
+        <div className="flex flex-col xs:flex-row gap-4 flex-grow">
+          {categoriesLoading ? (
+            <div>Loading categories...</div>
+          ) : (
+            <Select
+              options={optionsForCategories}
+              styles={customStyles}
+              placeholder="Filter Category"
+              className="flex-grow"
+              value={selectedCategory}
+              onChange={(selectedOption) => {
+                setSelectedCategory(selectedOption);
+                setCategories(selectedOption ? selectedOption.value : null);
+              }}
+              isClearable
+            />
+          )}
+          {isLoading || isLoadingOrg ? (
+            <div>Loading sources...</div>
+          ) : (
+            <Select
+              options={optionsForSources}
+              styles={customStyles}
+              placeholder="Filter Source"
+              className="flex-grow"
+              value={selectedSource}
+              onChange={(selectedOption) => {
+                setSelectedSource(selectedOption);
+                setSources(selectedOption ? selectedOption.value : null);
+              }}
+              isClearable
+            />
+          )}
+        </div>
+      ) : (
+        <p className="text-center mt-4">Filters Not supported for Guardian</p>
+      )}
       <div className="flex-grow">
         <CustomDatePicker setFromDate={setFromDate} setToDate={setToDate} />
       </div>

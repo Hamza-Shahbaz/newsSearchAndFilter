@@ -15,7 +15,6 @@ const Home = () => {
 
   const userPreference = useSelector((state) => state.user)
 
-  console.log(userPreference?.source?.value)
   return (
     <div className='flex flex-col grow'>
         <Preferences/>

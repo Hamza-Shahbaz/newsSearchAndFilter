@@ -16,12 +16,16 @@ const userSlice = createSlice({
             const { type, value } = action.payload;
             state[type] = "";
         },
+        clearPreferences: (state) => {
+            state.source = "";
+            state.category = "";
+            state.author = "";
+        },
         setNewsOutlet: (state, action) => {
-            console.log("Action payload", action.payload);
             state.selectedOutlet = action.payload;
         }
     }
 })
-export const {setPreference, reducePreference, setNewsOutlet} = userSlice.actions
+export const {setPreference, reducePreference, setNewsOutlet, clearPreferences} = userSlice.actions
 export default userSlice.reducer
  

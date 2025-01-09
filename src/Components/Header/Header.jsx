@@ -39,19 +39,19 @@ const Header = () => {
   }, [modalRef]);
 
   return (
-    <header className="flex justify-between items-center py-4 px-8 bg-gradient-to-r from-gray-50 to-gray-200 shadow-md w-full">
-      <div className="flex flex-row gap-2 items-center">
+    <header className="flex justify-between md:items-center py-4 md:px-8 bg-gradient-to-r from-gray-50 to-gray-200 shadow-md w-full">
+      <div className="flex flex-row gap-2 items-center flex-col sm:flex-row">
         <img
           src={logo}
           alt="Logo"
-          className="h-12 pl-20 cursor-pointer transition-transform transform hover:scale-105"
+          className="h-12 pl-4 sm:pl-20 cursor-pointer transition-transform transform hover:scale-105"
           onClick={() => navigate("/")}
         />
         <BeautifulDropdown />
       </div>
 
       <div
-        className="flex items-center gap-2 cursor-pointer relative"
+        className="flex items-center gap-2 cursor-pointer relative self-end md:self-center mr-8"
         onClick={handleClick}
         ref={buttonRef}
       >
