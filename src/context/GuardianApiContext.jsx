@@ -7,7 +7,7 @@ export const GuardianAPIProvider = ({ apiKey, children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const guardian = new Guardian(apiKey, false);
+  const guardian = new Guardian(apiKey, true);
 
   const fetchContent = async (query, params = {}) => {
     setLoading(true);
