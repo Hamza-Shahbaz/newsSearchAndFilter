@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./TableStatus.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearPreferences, setNewsOutlet } from "../../store/slices/userSlice";
 
 const options = [
@@ -28,8 +28,9 @@ const options = [
 ];
 
 const BeautifulDropdown = () => {
+  const selectedOutlet = useSelector((state) => state.user.selectedOutlet);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("NewsApi.AI");
+  const [selectedStatus, setSelectedStatus] = useState(selectedOutlet);
   const optionsRef = useRef(null);
   const buttonRef = useRef(null);
   const dispatch = useDispatch();

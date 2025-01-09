@@ -57,11 +57,7 @@ const ManagePreferences = () => {
   const selectedOutlet = useSelector((state) => state.user.selectedOutlet);
 
   const handleCategoryChange = (selectedOptions) => {
-    if (selectedOptions) {
-      dispatch(setPreference({ type: "category", value: selectedOptions }));
-    } else {
-      dispatch(setPreference({ type: "category", value: [] }));
-    }
+    dispatch(setPreference({ type: "category", value: selectedOptions }));
   };
 
   const handleSourceChange = (selectedOptions) => {
@@ -200,7 +196,7 @@ const ManagePreferences = () => {
                 styles={customStyles}
                 placeholder="Select Categories"
                 onChange={handleCategoryChange}
-                defaultValue={appliedCategories}
+                value={appliedCategories}
                 isClearable
                 className="w-full md:w-auto flex-1"
               />
@@ -225,7 +221,7 @@ const ManagePreferences = () => {
                 styles={customStyles}
                 placeholder="Select Sources"
                 onChange={handleSourceChange}
-                defaultValue={appliedSources}
+                value={appliedSources}
                 isClearable
                 className="w-full md:w-auto flex-1"
               />
@@ -252,7 +248,7 @@ const ManagePreferences = () => {
                   styles={customStyles}
                   placeholder="Select Authors"
                   onChange={handleAuthorChange}
-                  defaultValue={appliedAuthor}
+                  value={appliedAuthor}
                   isClearable
                   className="w-full md:w-auto flex-1"
                 />
